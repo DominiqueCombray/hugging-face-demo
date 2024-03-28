@@ -1,7 +1,16 @@
-import gradio as gr
+from transformers import pipeline
+import gradio as gradio
 
-def greet(name):
-    return "Hello " + name + "!!"
+model = pipeline("summarization")
 
-iface = gr.Interface(fn=greet, inputs="text", outputs="text")
-iface.launch()
+
+def predict(prompt):
+    summary = model(prompt)[0]["summary_text"]
+    return summary
+
+
+with gr.Blocks() as demo:
+    textbox = gr.Textbox(placeholder="Enter text block to summarize", lines=4)
+    gr.Interface(fn=predict, inputs=textbox, outputs="text")
+
+demo.launch()
