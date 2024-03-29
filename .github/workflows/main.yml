@@ -17,7 +17,7 @@ jobs:
         env:
           HF: ${{ secrets.HF }}
         run: git remote add space git@hf.co:spaces/DominiqueCombray/demo3
-     - name: Add Hugging Face Hub SSH key to known hosts
+      - name: Add Hugging Face Hub SSH key to known hosts
         run: ssh-keyscan hf.co >> ~/.ssh/known_hosts
       - name: Push to hub
         env:
